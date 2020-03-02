@@ -75,6 +75,12 @@ resource "aws_rds_cluster" "this" {
     }
   }
 
+  lifecycle { # We do not want to change password, nor store the current in code nor state so ignoring changes from here
+    ignore_changes = [
+      master_password,
+    ]
+  }
+
   tags = var.tags
 }
 
