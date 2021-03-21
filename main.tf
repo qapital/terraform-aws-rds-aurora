@@ -232,7 +232,7 @@ resource "aws_security_group" "this" {
 
   description = var.security_group_description == "" ? "Control traffic to/from RDS Aurora ${var.name}" : var.security_group_description
 
-  tags = merge(var.tags, {
+  tags = merge(var.tags, var.security_group_tags, {
     Name = local.name
   })
 }
