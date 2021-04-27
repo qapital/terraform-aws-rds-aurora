@@ -92,6 +92,7 @@ resource "aws_rds_cluster" "this" {
       ingestion_role        = s3_import.value.ingestion_role
     }
   }
+
   tags = var.tags
 }
 
