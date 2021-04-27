@@ -79,13 +79,19 @@ resource "aws_rds_cluster" "this" {
       timeout_action           = lookup(scaling_configuration.value, "timeout_action", null)
     }
   }
+  # We do not want to change password, nor store the current in code nor state so ignoring changes from here
+  lifecycle { ignore_changes = [master_password] }
 
-  lifecycle { # We do not want to change password, nor store the current in code nor state so ignoring changes from here
-    ignore_changes = [
-      master_password,
-    ]
+  dynamic "s3_import" {
+    for_each = var.s3_import != null ? [var.s3_import] : []
+    content {
+      source_engine         = "mysql"
+      source_engine_version = s3_import.value.source_engine_version
+      bucket_name           = s3_import.value.bucket_name
+      bucket_prefix         = lookup(s3_import.value, "bucket_prefix", null)
+      ingestion_role        = s3_import.value.ingestion_role
+    }
   }
-
   tags = var.tags
 }
 
