@@ -95,6 +95,9 @@ resource "aws_rds_cluster" "this" {
     }
   }
 
+  # We do not want to change the master_password
+  lifecycle { ignore_changes = [master_password] }
+
   dynamic "s3_import" {
     for_each = var.s3_import != null ? [var.s3_import] : []
     content {
