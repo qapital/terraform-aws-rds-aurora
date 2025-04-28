@@ -31,34 +31,38 @@ resource "aws_db_subnet_group" "this" {
 }
 
 resource "aws_rds_cluster" "this" {
-  global_cluster_identifier           = var.global_cluster_identifier
-  cluster_identifier                  = var.name
-  replication_source_identifier       = var.replication_source_identifier
-  source_region                       = var.source_region
-  engine                              = var.engine
-  engine_mode                         = var.engine_mode
-  engine_version                      = var.engine_version
-  kms_key_id                          = var.kms_key_id
-  database_name                       = var.database_name
-  master_username                     = var.username
-  master_password                     = local.master_password
-  final_snapshot_identifier           = "${var.final_snapshot_identifier_prefix}-${var.name}-${random_id.snapshot_identifier.hex}"
-  skip_final_snapshot                 = var.skip_final_snapshot
-  deletion_protection                 = var.deletion_protection
-  backup_retention_period             = var.backup_retention_period
-  preferred_backup_window             = var.preferred_backup_window
-  preferred_maintenance_window        = var.preferred_maintenance_window
-  port                                = local.port
-  db_subnet_group_name                = local.db_subnet_group_name
-  vpc_security_group_ids              = compact(concat(aws_security_group.this.*.id, var.vpc_security_group_ids))
-  snapshot_identifier                 = var.snapshot_identifier
-  storage_encrypted                   = var.storage_encrypted
-  apply_immediately                   = var.apply_immediately
-  db_cluster_parameter_group_name     = var.db_cluster_parameter_group_name
-  iam_database_authentication_enabled = var.iam_database_authentication_enabled
-  backtrack_window                    = local.backtrack_window
-  copy_tags_to_snapshot               = var.copy_tags_to_snapshot
-  iam_roles                           = var.iam_roles
+  global_cluster_identifier             = var.global_cluster_identifier
+  cluster_identifier                    = var.name
+  replication_source_identifier         = var.replication_source_identifier
+  source_region                         = var.source_region
+  engine                                = var.engine
+  engine_mode                           = var.engine_mode
+  engine_version                        = var.engine_version
+  kms_key_id                            = var.kms_key_id
+  database_name                         = var.database_name
+  master_username                       = var.username
+  master_password                       = local.master_password
+  final_snapshot_identifier             = "${var.final_snapshot_identifier_prefix}-${var.name}-${random_id.snapshot_identifier.hex}"
+  skip_final_snapshot                   = var.skip_final_snapshot
+  deletion_protection                   = var.deletion_protection
+  backup_retention_period               = var.backup_retention_period
+  preferred_backup_window               = var.preferred_backup_window
+  preferred_maintenance_window          = var.preferred_maintenance_window
+  port                                  = local.port
+  db_subnet_group_name                  = local.db_subnet_group_name
+  vpc_security_group_ids                = compact(concat(aws_security_group.this.*.id, var.vpc_security_group_ids))
+  snapshot_identifier                   = var.snapshot_identifier
+  storage_encrypted                     = var.storage_encrypted
+  apply_immediately                     = var.apply_immediately
+  db_cluster_parameter_group_name       = var.db_cluster_parameter_group_name
+  iam_database_authentication_enabled   = var.iam_database_authentication_enabled
+  backtrack_window                      = local.backtrack_window
+  copy_tags_to_snapshot                 = var.copy_tags_to_snapshot
+  iam_roles                             = var.iam_roles
+  enable_http_endpoint                  = var.enable_http_endpoint
+  performance_insights_enabled          = var.cluster_performance_insights_enabled
+  performance_insights_kms_key_id       = var.cluster_performance_insights_kms_key_id
+  performance_insights_retention_period = var.cluster_performance_insights_retention_period
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
