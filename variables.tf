@@ -313,6 +313,12 @@ variable "performance_insights_enabled" {
   default     = null
 }
 
+variable "database_insights_mode" {
+  description = "The mode of Database Insights to enable for the DB cluster"
+  type        = string
+  default     = "standard"
+}
+
 variable "performance_insights_kms_key_id" {
   description = "The ARN for the KMS key to encrypt Performance Insights data"
   type        = string

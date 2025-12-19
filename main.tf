@@ -83,6 +83,7 @@ resource "aws_rds_cluster" "this" {
   backtrack_window                    = local.backtrack_window
   copy_tags_to_snapshot               = var.copy_tags_to_snapshot
   enabled_cloudwatch_logs_exports     = var.enabled_cloudwatch_logs_exports
+  database_insights_mode              = var.database_insights_mode
 
   timeouts {
     create = lookup(var.cluster_timeouts, "create", null)
