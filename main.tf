@@ -84,6 +84,7 @@ resource "aws_rds_cluster" "this" {
   copy_tags_to_snapshot               = var.copy_tags_to_snapshot
   enabled_cloudwatch_logs_exports     = var.enabled_cloudwatch_logs_exports
   database_insights_mode              = var.database_insights_mode
+  performance_insights_enabled        = var.cluster_performance_insights_enabled
 
   timeouts {
     create = lookup(var.cluster_timeouts, "create", null)

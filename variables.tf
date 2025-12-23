@@ -307,8 +307,14 @@ variable "auto_minor_version_upgrade" {
   default     = null
 }
 
+variable "cluster_performance_insights_enabled" {
+  description = "Cluster: Specifies whether Performance Insights is enabled or not"
+  type        = bool
+  default     = false
+}
+
 variable "performance_insights_enabled" {
-  description = "Specifies whether Performance Insights is enabled or not"
+  description = "Instance: Specifies whether Performance Insights is enabled or not"
   type        = bool
   default     = null
 }
